@@ -1,0 +1,2 @@
+libnvoptix.so.#VERSION#	#LIBDIR#/#PRIVATE#/
+nvoptix.bin		#LIBDIR#/#PRIVATE#/
