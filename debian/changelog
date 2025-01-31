@@ -1,3 +1,9 @@
+nvidia-graphics-drivers (535.216.01-1~deb12u1+pexip24u2) pexip; urgency=medium
+
+  * Rebuild to move binary packages to gpu component.
+
+ -- Mark Hymers <mark.hymers@pexip.com>  Fri, 31 Jan 2025 15:31:23 +0000
+
 nvidia-graphics-drivers (535.216.01-1~deb12u1+pexip24u1) pexip; urgency=medium
 
   * Import new source package.
