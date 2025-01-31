@@ -1,8 +1,9 @@
 Source: nvidia-graphics-drivers${nvidia:Variant}
 Section: non-free/libs
 Priority: optional
-Maintainer: Debian NVIDIA Maintainers <pkg-nvidia-devel@lists.alioth.debian.org>
-Uploaders:
+Maintainer: Pexip AS <packaging@pexip.com>
+XSBC-Pexip-Original-Maintainer: Debian NVIDIA Maintainers <pkg-nvidia-devel@lists.alioth.debian.org>
+XSBC-Pexip-Original-Uploaders:
  Andreas Beckmann <anbe@debian.org>,
  Luca Boccassi <bluca@debian.org>,
 Vcs-Browser: https://salsa.debian.org/nvidia-team/nvidia-graphics-drivers
@@ -28,6 +29,7 @@ Build-Depends-Arch:
  libglvnd-dev,
 Testsuite: autopkgtest-pkg-dkms
 XS-Autobuild: yes
+XS-Pexip-Upstream: http://ftp.debian.org/debian/ trixie
 
 Package: ${nvidia}-driver
 Section: non-free/x11
