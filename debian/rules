@@ -298,7 +298,7 @@ pack-module-source:
 		--mtime='@$(SOURCE_DATE_EPOCH)' \
 		--clamp-mtime \
 		--remove-files \
-		modules | xz -T1 -9 > $(module_source_txz)
+		modules | xz -T+1 -9 > $(module_source_txz)
 	tar tfv $(module_source_txz)
 
 # only invoked manually
@@ -331,7 +331,7 @@ override_dh_bugfiles:
 
 override_dh_shlibdeps:
 	dh_shlibdeps -l/$(libdir)/$(nvidia_private)
-	test -z "$$(ls debian/*.substvars 2>/dev/null)" || sed -r -i 's/libnvidia-(e?glcore)-$(version)/lib$(nvidia)-\1 (= $${binary:Version})/g' debian/*.substvars
+	test -z "$$(ls debian/*.substvars 2>/dev/null)" || sed -r -i 's/libnvidia-(e?glcore|gpucomp)-$(version)/lib$(nvidia)-\1 (= $${binary:Version})/g' debian/*.substvars
 
 execute_before_dh_installdeb:
 	! command -v dh_movetousr >/dev/null || dh_movetousr

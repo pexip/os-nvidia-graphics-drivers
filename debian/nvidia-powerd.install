@@ -1,2 +1,4 @@
+#!/usr/bin/dh-exec --with=filter
 #nvidia-dbus.conf	usr/share/dbus-1/system.d/
 nvidia-powerd		usr/sbin/
+dlsnetparams.csv	usr/share/nvidia/nvidia-powerd/		[arm64]

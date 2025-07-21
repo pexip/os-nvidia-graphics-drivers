@@ -1,5 +1,5 @@
-1ac782447419fd218f86bd98b81bdbd3  debian/control
-c8dc18045ca0cc1224e2e3e5dcb8164e  debian/control.in
+93d5703fe88b82e494f7fc7e3243cdc8  debian/control
+cf9991541cf862fd455c40e80b04cba3  debian/control.in
 8489c83cfe0171c9de6d052c01a6d19b  debian/gen-control.pl
-edf87fc3e75d36637927cd4358266ae1  debian/rules
-6f4012a154fc16693a2c2a43a292ca78  debian/rules.defs
+6989938d8da162c4e42de7119867adc2  debian/rules
+bc2262adfa9ea3040e894a6fbe5ea2d2  debian/rules.defs
