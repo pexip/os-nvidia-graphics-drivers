@@ -34,6 +34,25 @@ Dpkg::Control::FieldsCore::field_register(
 	name => 'XS-Autobuild',
 );
 
+# Same for Pexip fields
+Dpkg::Control::FieldsCore::field_register(
+	'XS-Pexip-Upstream',
+	CTRL_INFO_SRC,
+	name => 'XS-Pexip-Upstream',
+);
+
+Dpkg::Control::FieldsCore::field_register(
+	'XSBC-Pexip-Original-Maintainer',
+	CTRL_INFO_SRC,
+	name => 'XSBC-Pexip-Original-Maintainer',
+);
+
+Dpkg::Control::FieldsCore::field_register(
+	'XSBC-Pexip-Original-Uploaders',
+	CTRL_INFO_SRC,
+	name => 'XSBC-Pexip-Original-Uploaders',
+);
+
 sub wscleanup
 {
 	$_ = shift;
