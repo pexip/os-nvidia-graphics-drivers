@@ -1,3 +1,9 @@
+nvidia-graphics-drivers (535.247.01-1~deb12u1~pexip24u1) pexip; urgency=medium
+
+  * New upstream release.
+
+ -- Mark Hymers <mark.hymers@pexip.com>  Thu, 31 Jul 2025 09:57:21 +0100
+
 nvidia-graphics-drivers (535.247.01-1~deb12u1) bookworm; urgency=medium
 
   * Rebuild for bookworm.
