@@ -1,8 +1,412 @@
+nvidia-graphics-drivers (550.163.01-2) unstable; urgency=medium
+
+  [ Andreas Beckmann ]
+  * Backport ccflags-y, nv_timer_delete_sync, __iowrite64_lo_hi, page_pgmap
+    and make_device_exclusive changes from 570.153.02 and nv_vma_start_write
+    changes from 570.169 to fix kernel module build for Linux 6.15.
+    (Closes: #1107606)
+  * Backport NV_DRM_FBDEV_AVAILABLE changes from 570.169.
+
+  [ Luca Boccassi ]
+  * Remove myself from Uploaders.
+
+ -- Andreas Beckmann <anbe@debian.org>  Mon, 21 Jul 2025 23:28:46 +0200
+
+nvidia-graphics-drivers (550.163.01-1) unstable; urgency=medium
+
+  * New upstream production and Tesla branch release 550.163.01 (2025-04-17).
+    * Fixed CVE-2025-23244.  (Closes: #1104068)
+      https://nvidia.custhelp.com/app/answers/detail/a_id/5630
+    * Improved compatibility with recent Linux kernels.
+  * New upstream release 535 series.
+    - Fixed an issue that could cause render-offloaded applications using
+      KDE Frameworks 6 to crash.
+
+  [ Andreas Beckmann ]
+  * Refresh patches.
+  * Update nv-readme.ids.
+  * Upload to unstable.
+
+ -- Andreas Beckmann <anbe@debian.org>  Wed, 11 Jun 2025 22:29:12 +0200
+
+nvidia-graphics-drivers (550.144.03-2) experimental; urgency=medium
+
+  * Backport more drm ttm and fbdef conditionals from 550.163.01.
+    (Closes: #1106597)
+  * Upload to experimental.
+
+ -- Andreas Beckmann <anbe@debian.org>  Thu, 05 Jun 2025 01:02:12 +0200
+
+nvidia-graphics-drivers (550.144.03-1) unstable; urgency=medium
+
+  * New upstream production and Tesla branch release 550.144.03 (2025-01-16).
+    * Fixed CVE-2024-0150, CVE-2024-0147, CVE-2024-53869, CVE-2024-0131,
+      CVE-2024-0149.  (Closes: #1093908)
+      https://nvidia.custhelp.com/app/answers/detail/a_id/5614
+    * Improved compatibility with recent Linux kernels.
+  * New upstream production branch release 550.142 (2024-12-17).
+
+  [ Andreas Beckmann ]
+  * Update nv-readme.ids.
+  * Refresh patches.
+  * Upload to unstable.  (Closes: #1102741)
+
+ -- Andreas Beckmann <anbe@debian.org>  Thu, 22 May 2025 08:26:47 +0200
+
+nvidia-graphics-drivers (550.135-1) experimental; urgency=medium
+
+  * New upstream production branch release 550.135 (2024-11-19).
+    * Improved compatibility with recent Linux kernels.
+  * New upstream Tesla branch release 550.127.08 (2024-11-19).
+
+  [ Andreas Beckmann ]
+  * Update nv-readme.ids.
+  * Refresh patches.
+
+ -- Andreas Beckmann <anbe@debian.org>  Mon, 19 May 2025 21:23:54 +0200
+
+nvidia-graphics-drivers (550.127.05-1) experimental; urgency=medium
+
+  * New upstream production and Tesla branch release 550.127.05 (2024-10-22).
+    * Fixed CVE-2024-0126.  (Closes: #1085968)
+      https://nvidia.custhelp.com/app/answers/detail/a_id/5586
+    - Fixed a bug which could cause applications using GBM to crash when
+      running with nvidia-drm.modeset=0.
+  * New upstream production branch release 550.120 (2024-09-19).
+    - In Linux kernel 6.11, drm_fbdev_generic was renamed to drm_fbdev_ttm.
+      Use drm_fbdev_ttm when present to keep supporting direct framebuffer
+      access needed for Wayland compositors to present content on newer
+      kernels.
+    - In linux-next commit 446d0f4849b1, output_poll_changed is removed
+      from struct drm_mode_config_funcs. Do not implement the function
+      pointer member when not present to ensure the driver can compile with
+      newer kernels. The driver now supports enumerating modes on hotplug
+      events through the DRM fbdev API.
+    * Improved compatibility with recent Linux kernels.
+
+  [ Andreas Beckmann ]
+  * Refresh patches.
+
+ -- Andreas Beckmann <anbe@debian.org>  Sun, 18 May 2025 19:02:18 +0200
+
+nvidia-graphics-drivers (550.107.02-1) experimental; urgency=medium
+
+  * New upstream production branch release 550.107.02 (2024-07-29).
+    - Fixed a race condition involving modeset ownership which could lead
+      to flip event timeout errors when enabling the 'fbdev' kernel module
+      parameter in nvidia-drm.
+    - Fixed a regression that caused nvidia-powerd to exit when
+      nvidia-dbus.conf was not present in the /etc/dbus-1/system.d/
+      directory.
+    - Fixed a bug that could cause memory corruption while handling
+      ACPI events on some notebooks.
+    - Fixed a bug that could cause kernel crashes upon attempting KMS
+      operations through DRM when nvidia_drm was loaded with modeset=0.
+  * New upstream production branch release 550.100 (2024-07-09).
+  * New upstream Tesla branch release 550.90.12 (2024-09-10).
+
+  [ Andreas Beckmann ]
+  * Update nv-readme.ids.
+  * Refresh patches.
+
+ -- Andreas Beckmann <anbe@debian.org>  Sat, 17 May 2025 01:57:12 +0200
+
+nvidia-graphics-drivers (550.90.07-1) experimental; urgency=medium
+
+  * New upstream production and Tesla branch release 550.90.07 (2024-06-04).
+    * Fixed CVE-2024-0090, CVE-2024-0091, CVE-2024-0092.  (Closes: #1072792)
+      https://nvidia.custhelp.com/app/answers/detail/a_id/5551
+    - Temporarily disabled the GLX_EXT_buffer_age extension on Xwayland to
+      work around a bug that could cause corruption.
+    - Fixed a bug that could cause corruption when the GLX_EXT_buffer_age
+      extension is used on X.org with PRIME render offloading.
+    * Improved compatibility with recent Linux kernels.
+
+  [ Andreas Beckmann ]
+  * Update nv-readme.ids.
+  * Refresh patches.
+
+ -- Andreas Beckmann <anbe@debian.org>  Mon, 12 May 2025 20:04:34 +0200
+
+nvidia-graphics-drivers (550.78-1) experimental; urgency=medium
+
+  * New upstream production branch release 550.78 (2024-04-25).
+    - Fixed a regression that led to Xid errors when loading the NVIDIA
+      driver on some notebook systems with RTX 4xxx series GPUs.
+  * New upstream production branch release 550.76 (2024-04-16).
+    - Fixed a bug that could prevent the driver from initializing on some
+      systems running RHEL 9.3.
+  * New upstream production branch release 550.67 (2024-03-19).
+    - Fixed a bug that could cause the GPU driver to hang when running some
+      Vkd3d games, such as F1 2021.
+    - Fixed a bug that caused eglExportDMABUFImageQueryMESA() to return
+      invalid DRM formats for the images that use the sRGB color space.
+    - Fixed a bug that caused wgpu applications to hang on Wayland.
+    - Fixed a bug that caused "Flip event timeout" messages to be printed to the
+      system log when the system is suspended without using
+      /usr/bin/nvidia-sleep.sh when nvidia-drm is loaded with the `fbdev=1`
+      kernel module parameter.
+    * Drop ppc64le driver.
+
+  [ Andreas Beckmann ]
+  * Refresh patches.
+  * Update nv-readme.ids.
+  * Stop building driver packages for ppc64el.
+  * Stop building nvidia-cuda-mps and nvidia-detect for ppc64el.
+
+ -- Andreas Beckmann <anbe@debian.org>  Fri, 09 May 2025 10:49:20 +0200
+
+nvidia-graphics-drivers (550.54.15-1) experimental; urgency=medium
+
+  * New upstream Tesla branch release 550.54.15 (2024-03-18).
+    * This is the last driver release supporting the ppc64el architecture.
+  * New upstream production and Tesla branch release 550.54.14 (2024-02-23).
+    * Fixed CVE-2024-0074, CVE-2024-0075, CVE-2024-0078.  (Closes: #1064983)
+      https://nvidia.custhelp.com/app/answers/detail/a_id/5520
+    - Fixed a bug that caused HDMI FRL displays to flicker or blank when
+      enabling VRR with 8 bits per color channel.
+    - Fixed a regression introduced with the 550.40.07 beta driver which
+      caused corrupted window decorations in some applications when running
+      on GNOME.
+    - Fixed a bug where vkAcquireNextImageKHR() was not returning
+      VK_ERROR_OUT_OF_DATE_KHR when it should with WSI X11 swapchains.
+    - Fixed a bug where fences passed to VkSwapchainPresentFenceInfoEXT could
+      signal earlier than expected when a WSI X11 swapchain becomes out of date.
+    - Fixed Xid errors on Hogwarts Legacy and Forza Horizon 4.
+    * Improved compatibility with recent Linux kernels.
+
+  [ Andreas Beckmann ]
+  * Merge changes from 535.161.08-3.  (Closes: #1072722)
+  * Refresh patches.
+  * Update nv-readme.ids.
+  * Update symbols files.
+  * libcuda1: Add Provides: libcuda-12.4-1.
+
+ -- Andreas Beckmann <anbe@debian.org>  Tue, 29 Apr 2025 09:15:30 +0200
+
+nvidia-graphics-drivers (550.40.07-1) experimental; urgency=medium
+
+  * New upstream beta 550.40.07 (2024-01-24).
+    - Fixed an issue that sometimes caused Wayland applications to run at less
+      than one frame per second on Maxwell, Volta, and Pascal series GPUs.
+    - Added support for the VK_KHR_video_encode_queue,
+      VK_KHR_video_encode_h264, VK_KHR_video_encode_h265 and
+      VK_KHR_video_maintenance1 extensions.
+    - Fixed a bug that caused an intermittent drop in desktop framerate.
+    - Fixed a bug that caused "Flip event timeout" messages to be printed to the
+      system log when displays are hotplugged when nvidia-drm is loaded with the
+      `fbdev=1` kernel module parameter.
+    - Fixed intermittent Xid errors on Horizon Zero Dawn, Metro Exodus,
+      Forza Horizon 5, and Halo Infinite.
+    - Fixed a bug which prevented the "NoMaxPClkCheck" mode validation token
+      from working on single-link TMDS (e.g. DVI, HDMI) outputs.
+    - Fixed a bug that allowed VRR displays to be driven below their minimum
+      refresh rate, resulting in a blank or flickering image.
+    - Added an application profile to improve Kwin performance on hybrid GPU
+      systems by setting OGL_DEDICATED_HW_STATE_PER_CONTEXT=ENABLE_ROBUST.
+    - Updated the build process for NVIDIA kernel modules to honor the
+      INSTALL_MOD_DIR Kbuild environment variable.
+    - Added support for R8, GR88 and YCbCr GBM formats.
+    - Optimized the X driver headless framerate limiter to more closely mimic
+      upstream behavior and prevent it from activating in inconvenient
+      situations. Added a new X config option "LimitFrameRateWhenHeadless" to
+      disable the headless framerate limiter.
+    - Fixed a bug that prevented Gamescope from running when using the NVIDIA
+      Open GPU Kernel modules.
+    - Use transparent huge pages for OpenGL/Vulkan when available for the .text
+      section. This is done through madvise() calls, and requires a Linux kernel
+      configured with CONFIG_READ_ONLY_THP_FOR_FS.
+    * Improved compatibility with recent Linux kernels.
+
+  [ Andreas Beckmann ]
+  * Refresh patches.
+  * Update nv-readme.ids.
+  * Update symbols files.
+  * nvidia-powerd is now available on arm64.
+  * Update lintian overrides.
+  * Upload to experimental.
+
+ -- Andreas Beckmann <anbe@debian.org>  Wed, 23 Apr 2025 07:23:08 +0200
+
+nvidia-graphics-drivers (545.29.06-2) unstable; urgency=medium
+
+  * Stop building driver packages for ppc64el.
+  * Stop building nvidia-cuda-mps and nvidia-detect for ppc64el.
+  * Upload to unstable.  (Closes: #1105205)
+
+ -- Andreas Beckmann <anbe@debian.org>  Fri, 16 May 2025 03:19:40 +0200
+
+nvidia-graphics-drivers (545.29.06-1) experimental; urgency=medium
+
+  * New upstream new feature branch release 545.29.06 (2023-11-22).
+    - Fixed a regression that prevented setting backlight brightness levels.
+    - Fixed a bug that caused games built on the Source 2 engine to hang
+      when running under Xwayland.
+  * New upstream new feature branch release 545.29.02 (2023-10-31).
+    * Fixed CVE-2023-31022.  (Closes: #1055136)
+      https://nvidia.custhelp.com/app/answers/detail/a_id/5491
+
+  [ Andreas Beckmann ]
+  * Refresh patches.
+
+ -- Andreas Beckmann <anbe@debian.org>  Tue, 15 Apr 2025 22:15:51 +0200
+
+nvidia-graphics-drivers (545.23.06-6) experimental; urgency=medium
+
+  * Backport drm_driver_has_date changes from 570.124.04 to fix kernel module
+    build for Linux 6.14.
+  * Backport crypto_akcipher_verify changes from 550.144.03 to fix open kernel
+    module build for Linux 6.13.
+  * Let pahole ignore language c++11 for BTF generation.
+  * Bump Standards-Version to 4.7.2. No changes needed.
+
+ -- Andreas Beckmann <anbe@debian.org>  Tue, 01 Apr 2025 20:53:33 +0200
+
+nvidia-graphics-drivers (545.23.06-5) experimental; urgency=medium
+
+  * Backport module_import_ns_takes_string_literal changes from 550.144.03 and
+    folio_test_swapcache changes from 565.57.01 to fix open kernel module
+    build for Linux 6.13.
+  * Work around a pahole deadlock while generating btf debug info for the open
+    kernel module.
+
+ -- Andreas Beckmann <anbe@debian.org>  Sun, 16 Mar 2025 10:48:32 +0100
+
+nvidia-graphics-drivers (545.23.06-4) experimental; urgency=medium
+
+  * Backport cmd_symlink changes from 550.142 to fix kernel module build for
+    Linux 6.13.
+  * Backport drm_output_poll_changed changes from 535.216.01 to fix kernel
+    module build for Linux 6.12.
+  * Backport file_operations_fop_unsigned_offset_present changes from
+    535.230.02.
+    (Closes: #1094903, #1095032, #1093246, #1092957, #1089513, #1089811)
+  * Backport warning fixes from 535.146.02, 535.216.01, 535.230.02, 550.40.07,
+    550.90.07, 550.120, 560.28.03 and 565.57.01.
+  * nvidia-vulkan-icd: Promote libnvidia-rtcore to Depends. (Closes: #1081314)
+  * Prevent co-installation with EoL drivers from bookworm.
+
+ -- Andreas Beckmann <anbe@debian.org>  Mon, 17 Feb 2025 13:19:12 +0100
+
+nvidia-graphics-drivers (545.23.06-3) experimental; urgency=medium
+
+  * Simplify using nv_pfn_valid() in virt_addr_valid() on ppc64el.
+  * Backport nv_get_kern_phys_address() changes from 555.42.02 to fix kernel
+    module build with gcc-14 on arm*.  (Closes: #1084844)
+  * libegl-nvidia0: Add manual dependency on libnvidia-egl-wayland1 as
+    libnvidia-egl-wayland.so.1 seems to get dlopen()ed now. (Closes: #1072142)
+
+ -- Andreas Beckmann <anbe@debian.org>  Fri, 25 Oct 2024 09:49:01 +0200
+
+nvidia-graphics-drivers (545.23.06-2) experimental; urgency=medium
+
+  * Use dh_movetousr (if available) to relocate the firmware to /usr where
+    needed.  (Closes: #1073744)
+  * Log an error message if nvidia-peermem refuses to load because it was
+    built without IB peer memory symbols present.  (Closes: #1074350)
+  * Backport CONFIG_MITIGATION_RETPOLINE changes from 470.256.02.
+  * Backport follow_pfn changes from 550.90.07 to fix kernel module build for
+    Linux 6.10.
+    (Closes: #1077841, #1078425, #1078462, #1078489, #1078424, #1082725)
+  * Use pfn_valid() variant with rcu_read_{,un}lock_sched() from Linux 6.8-rc3
+    in virt_addr_valid() for Linux 5.10.210 - 5.10.999 to avoid using GPL
+    symbols on ppc64el.
+  * bug-script: Report 'apt-cache policy' (535.183.06-1).
+  * Bump Standards-Version to 4.7.0. No changes needed.
+
+ -- Andreas Beckmann <anbe@debian.org>  Mon, 12 Aug 2024 08:18:38 +0200
+
+nvidia-graphics-drivers (545.23.06-1) experimental; urgency=medium
+
+  * New upstream beta 545.23.06 (2023-10-17).  (Closes: #1055422)
+    - Added experimental HDMI 10 bits per component support; enable by loading
+      nvidia-modeset with `hdmi_deepcolor=1`.
+    - Added support for HDR signaling via the HDR_OUTPUT_METADATA and
+      Colorspace per-connector DRM properties when nvidia-drm is loaded with the
+      `modeset=1` parameter.
+    - Added support for PRIME render offload to Vulkan Wayland WSI.
+    - Added support for the CTM, DEGAMMA_LUT, and GAMMA_LUT DRM-KMS CRTC
+      properties. These are used by features such as the "Night Light"
+      feature in GNOME and the "Night Color" feature in KDE, when they
+      are used as Wayland compositors.
+    - Added beta-quality support for GeForce and Workstation GPUs to open
+      kernel modules. Please see the "Open Linux Kernel Modules" chapter in
+      the README for details.
+    - Added initial experimental support for runtime D3 (RTD3) power
+      management on Desktop GPUs.  Please see the 'PCI-Express Runtime D3
+      (RTD3) Power Management' chapter in the README for more details.
+    - Added support for the EGL_ANDROID_native_fence_sync EGL extension and
+      the VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_SYNC_FD_BIT and
+      VK_EXTERNAL_FENCE_HANDLE_TYPE_SYNC_FD_BIT Vulkan external handle types
+      when the nvidia-drm kernel module is loaded with the modeset=1 parameter.
+    - Added experimental support for framebuffer consoles provided by
+      nvidia-drm. On kernels that implement drm_fbdev_generic_setup and
+      drm_aperture_remove_conflicting_pci_framebuffers, nvidia-drm will install
+      a framebuffer console when loaded with both `modeset=1` and `fbdev=1`
+      kernel module parameters. This will replace the Linux boot console driven
+      by a system framebuffer driver such as efifb or vesafb.
+      Note that when an nvidia-drm framebuffer console is enabled, unloading
+      nvidia-drm will cause the screen to turn off.
+    - Added support for virtual reality displays, such as the SteamVR platform,
+      on Wayland compositors that support DRM leasing. Support requires
+      xwayland version 22.1.0 and wayland-protocols version 1.22, or later.
+      Tested on sway, minimum version 1.7 with wlroots version 0.15, and also
+      on Kwin, minimum version 5.24.
+      Note: Before xwayland 23.2, there is a known issue with HDMI displays
+      where the headset will fail to start a second time after closing SteamVR.
+      This can be worked around by unplugging and replugging in the headset.
+    - Fixed a bug that prevented VRR (Variable Refresh Rate) from working
+      with Wayland.
+    - Changed the name visible in /proc/devices of NVIDIA devices and the
+      NVIDIA control device from "nvidia-frontend" to "nvidia" and "nvidiactl".
+      Scripts which parse /proc/devices (such as udev rules) may need to be
+      updated. Note that the conventional /dev device paths like /dev/nvidia0
+      and /dev/nvidiactl remain unchanged.
+    - Added support to the NVIDIA VDPAU driver for running in Xwayland. Please
+      refer to the "Xwayland support in VDPAU" section of the README for
+      further details.
+    - Added libnvidia-gpucomp.so to the driver package.  This is a helper
+      library used for GPU shader compilation.
+    - Removed libnvidia-vulkan-producer.so from the driver package. This
+      helper library is no longer needed by the Wayland WSI.
+    * Drop ppc64le driver.
+
+  [ Andreas Beckmann ]
+  * Refresh patches.  (Closes: #1064571)
+  * Update nv-readme-open.ids.
+  * Update symbols files.
+  * libnvidia-gpucomp: New package for the NVIDIA GPU compiler library.
+  * libcuda1: Add Provides: libcuda-12.3-1.
+  * Update lintian overrides.
+  * Upload to experimental.
+
+ -- Andreas Beckmann <anbe@debian.org>  Thu, 28 Mar 2024 18:03:18 +0100
+
+nvidia-graphics-drivers (535.247.01-2) UNRELEASED; urgency=medium
+
+  [ Andreas Beckmann ]
+  * Backport drm_connector_helper_funcs_mode_valid_has_const_mode_arg changes
+    from 550.163.01 and ccflags-y, nv_timer_delete_sync, __iowrite64_lo_hi,
+    page_pgmap and make_device_exclusive changes from 570.153.02 and
+    nv_vma_start_write changes from 570.169 to fix kernel module build for
+    Linux 6.15.
+
+  [ Luca Boccassi ]
+  * Remove myself from Uploaders.
+
+ -- Andreas Beckmann <anbe@debian.org>  Sat, 19 Jul 2025 21:46:11 +0200
+
 nvidia-graphics-drivers (535.247.01-1+pexip25u1) pexip-trixie; urgency=medium
 
   * Initial trixie release.
 
  -- Mark Hymers <mark.hymers@pexip.com>  Fri, 16 May 2025 14:07:06 +0100
+
+nvidia-graphics-drivers (535.247.01-1~deb12u1) bookworm; urgency=medium
+
+  * Rebuild for bookworm.
+
+ -- Andreas Beckmann <anbe@debian.org>  Thu, 08 May 2025 22:59:00 +0200
 
 nvidia-graphics-drivers (535.247.01-1) unstable; urgency=medium
 
@@ -19,9 +423,15 @@ nvidia-graphics-drivers (535.247.01-1) unstable; urgency=medium
 nvidia-graphics-drivers (535.230.02-1) unstable; urgency=medium
 
   * New upstream LTS and Tesla branch release 535.230.02 (2025-01-16).
-    * Fixed CVE-2024-0150, CVE-2024-0147, CVE-2024-53869, CVE-2024-0131,
-      CVE-2024-0149.  (Closes: #1093908)
+    * Fixed CVE-2024-0150, CVE-2024-0147, CVE-2024-0131, CVE-2024-0149.
+      (Closes: #1093908)
       https://nvidia.custhelp.com/app/answers/detail/a_id/5614
+    - Updated the kernel module build process to use CONFIG_CC_VERSION_TEXT
+      from the Linux kernel's Kconfig to detect the compiler used to build
+      the kernel. This may help select the correct compiler on systems where
+      the kernel was built with a compiler other than the default one.
+    - Fixed a bug that prevented kernel modules linked using precompiled
+      kernel interface files from loading on recent Debian systems.
     * Drop ppc64le driver.
     * Improved compatibility with recent Linux kernels.
 
@@ -103,6 +513,20 @@ nvidia-graphics-drivers (535.216.01-1) unstable; urgency=medium
   * New upstream LTS and Tesla branch release 535.216.01 (2024-10-22).
     * Fixed CVE-2024-0126.  (Closes: #1085968)
       https://nvidia.custhelp.com/app/answers/detail/a_id/5586
+    - In linux-next commit 446d0f4849b1, intended to be included in Linux
+      kernel 6.12, output_poll_changed is removed from struct
+      drm_mode_config_funcs. Do not implement the function pointer member
+      when not present to ensure the driver can compile with newer kernels.
+      Populating modes for DRM connectors during hotplug events will not be
+      supported with r535 and kernels containing the relevant commit.
+    - Fixed a bug that caused the nvidia-powerd service to fail on some
+      ADA notebooks with the error message "Error in getting the NvPCF
+      static configuration".
+    - Fixed a bug that could cause external displays to become frozen until
+      the next modeset when using PRIME Display Offloading with the NVIDIA
+      dGPU acting as the display offload sink.
+    - Fixed a bug that caused OpenGL triple buffering to behave like double
+      buffering.
     * Improved compatibility with recent Linux kernels.
 
   [ Andreas Beckmann ]
@@ -155,6 +579,15 @@ nvidia-graphics-drivers (535.183.01-1) unstable; urgency=medium
     - Fixed a bug that could cause additional X screens to claim displays
       that should have been assigned to a prior X screen based on the given X
       configuration.
+
+  [ Andreas Beckmann ]
+  * Refresh patches.
+  * Update nv-readme.ids.
+
+ -- Andreas Beckmann <anbe@debian.org>  Fri, 14 Jun 2024 11:20:01 +0200
+
+nvidia-graphics-drivers (535.179-1) UNRELEASED; urgency=medium
+
   * New upstream long term support branch release 535.179 (2024-05-09).
   * New upstream long term support branch release 535.171.04 (2024-03-21).
     - Fixed Xid error when playing Alan Wake 2 with ray tracing enabled.
@@ -166,7 +599,7 @@ nvidia-graphics-drivers (535.183.01-1) unstable; urgency=medium
   * Refresh patches.
   * Update nv-readme.ids.
 
- -- Andreas Beckmann <anbe@debian.org>  Fri, 14 Jun 2024 11:20:01 +0200
+ -- Andreas Beckmann <anbe@debian.org>  Tue, 14 May 2024 09:03:28 +0200
 
 nvidia-graphics-drivers (535.161.08-3) unstable; urgency=medium
 
@@ -482,6 +915,22 @@ nvidia-graphics-drivers (530.30.02-1) experimental; urgency=medium
   * Upload to experimental.
 
  -- Andreas Beckmann <anbe@debian.org>  Mon, 13 Mar 2023 23:48:29 +0100
+
+nvidia-graphics-drivers (525.147.05-17) UNRELEASED; urgency=medium
+
+  [ Luca Boccassi ]
+  * Remove myself from Uploaders.
+
+ -- Andreas Beckmann <anbe@debian.org>  Sun, 20 Jul 2025 17:35:28 +0200
+
+nvidia-graphics-drivers (525.147.05-16) UNRELEASED; urgency=medium
+
+  * Backport drm_connector_helper_funcs_mode_valid_has_const_mode_arg changes
+    from 550.163.01 and ccflags-y and nv_timer_delete_sync changes from
+    570.153.02 and nv_vma_start_write changes from 570.169 to fix kernel
+    module build for Linux 6.15.
+
+ -- Andreas Beckmann <anbe@debian.org>  Mon, 23 Jun 2025 09:53:50 +0200
 
 nvidia-graphics-drivers (525.147.05-14) UNRELEASED; urgency=medium
 
@@ -1350,6 +1799,22 @@ nvidia-graphics-drivers (495.44-1) experimental; urgency=medium
 
  -- Andreas Beckmann <anbe@debian.org>  Fri, 05 Nov 2021 10:45:12 +0100
 
+nvidia-graphics-drivers (470.256.02-8) UNRELEASED; urgency=medium
+
+  [ Luca Boccassi ]
+  * Remove myself from Uploaders.
+
+ -- Andreas Beckmann <anbe@debian.org>  Sun, 20 Jul 2025 17:30:24 +0200
+
+nvidia-graphics-drivers (470.256.02-7) UNRELEASED; urgency=medium
+
+  * Backport drm_connector_helper_funcs_mode_valid_has_const_mode_arg changes
+    from 550.163.01 and ccflags-y and nv_timer_delete_sync changes from
+    570.153.02 and nv_vma_start_write changes from 570.169 to fix kernel
+    module build for Linux 6.15.
+
+ -- Andreas Beckmann <anbe@debian.org>  Mon, 23 Jun 2025 02:49:53 +0200
+
 nvidia-graphics-drivers (470.256.02-6) UNRELEASED; urgency=medium
 
   * Backport drm_driver_has_date changes from 570.124.04 to fix kernel module
@@ -1414,6 +1879,8 @@ nvidia-graphics-drivers (470.256.02-1) bullseye; urgency=medium
     - Fixed a bug that could cause the X server to crash when graphics
       applications requested single-buffered drawables while certain
       features (such as Vulkan sharpening) are enabled.
+    - Fixed a bug that caused driver build failure when using separate
+      kernel source and output directories on Linux v6.6 and later.
 
   [ Andreas Beckmann ]
   * Refresh patches.
@@ -2087,6 +2554,26 @@ nvidia-graphics-drivers (465.24.02-1) experimental; urgency=medium
 
  -- Andreas Beckmann <anbe@debian.org>  Tue, 27 Apr 2021 18:48:53 +0200
 
+nvidia-graphics-drivers (460.106.00-22) UNRELEASED; urgency=medium
+
+  [ Andreas Beckmann ]
+  * Backport nv_vma_start_write changes from 570.169.
+
+  [ Luca Boccassi ]
+  * Remove myself from Uploaders.
+
+ -- Andreas Beckmann <anbe@debian.org>  Sun, 20 Jul 2025 17:21:59 +0200
+
+nvidia-graphics-drivers (460.106.00-21) UNRELEASED; urgency=medium
+
+  * Backport ccflags-y and nv_timer_delete_sync changes from 570.153.02 and
+    drm_connector_helper_funcs_mode_valid_has_const_mode_arg changes from
+    550.163.01 and import tentative fix from CachyOS for avoiding calls to
+    GPL-only symbol __vma_start_write to fix kernel module build for
+    Linux 6.15.
+
+ -- Andreas Beckmann <anbe@debian.org>  Wed, 18 Jun 2025 23:44:24 +0200
+
 nvidia-graphics-drivers (460.106.00-20) UNRELEASED; urgency=medium
 
   * Backport drm_driver_has_date changes from 570.124.04 to fix kernel module
@@ -2659,6 +3146,26 @@ nvidia-graphics-drivers (455.23.04-1) experimental; urgency=medium
   * Upload to experimental.
 
  -- Andreas Beckmann <anbe@debian.org>  Thu, 24 Sep 2020 21:52:54 +0200
+
+nvidia-graphics-drivers (450.248.02-12) UNRELEASED; urgency=medium
+
+  [ Andreas Beckmann ]
+  * Backport nv_vma_start_write changes from 570.169.
+
+  [ Luca Boccassi ]
+  * Remove myself from Uploaders.
+
+ -- Andreas Beckmann <anbe@debian.org>  Sun, 20 Jul 2025 17:13:55 +0200
+
+nvidia-graphics-drivers (450.248.02-11) UNRELEASED; urgency=medium
+
+  * Backport ccflags-y and nv_timer_delete_sync changes from 570.153.02 and
+    drm_connector_helper_funcs_mode_valid_has_const_mode_arg changes from
+    550.163.01 and import tentative fix from CachyOS for avoiding calls to
+    GPL-only symbol __vma_start_write to fix kernel module build for
+    Linux 6.15.
+
+ -- Andreas Beckmann <anbe@debian.org>  Wed, 18 Jun 2025 22:30:15 +0200
 
 nvidia-graphics-drivers (450.248.02-10) UNRELEASED; urgency=medium
 
@@ -3794,6 +4301,26 @@ nvidia-graphics-drivers (430.14-1) experimental; urgency=medium
 
  -- Andreas Beckmann <anbe@debian.org>  Sat, 25 May 2019 13:49:09 +0200
 
+nvidia-graphics-drivers (418.226.00-20) UNRELEASED; urgency=medium
+
+  [ Andreas Beckmann ]
+  * Backport nv_vma_start_write changes from 570.169.
+
+  [ Luca Boccassi ]
+  * Remove myself from Uploaders.
+
+ -- Andreas Beckmann <anbe@debian.org>  Fri, 20 Jun 2025 00:52:30 +0200
+
+nvidia-graphics-drivers (418.226.00-19) UNRELEASED; urgency=medium
+
+  * Backport ccflags-y and nv_timer_delete_sync changes from 570.153.02 and
+    drm_connector_helper_funcs_mode_valid_has_const_mode_arg changes from
+    550.163.01 and import tentative fix from CachyOS for avoiding calls to
+    GPL-only symbol __vma_start_write to fix kernel module build for
+    Linux 6.15.
+
+ -- Andreas Beckmann <anbe@debian.org>  Wed, 18 Jun 2025 17:21:29 +0200
+
 nvidia-graphics-drivers (418.226.00-18) UNRELEASED; urgency=medium
 
   * Backport drm_driver_has_date changes from 570.124.04 to fix kernel module
@@ -4741,6 +5268,26 @@ nvidia-graphics-drivers (396.18-1) experimental; urgency=medium
   * Upload to experimental.
 
  -- Andreas Beckmann <anbe@debian.org>  Sun, 22 Apr 2018 13:59:45 +0200
+
+nvidia-graphics-drivers (390.157-14) UNRELEASED; urgency=medium
+
+  [ Andreas Beckmann ]
+  * Backport nv_vma_start_write changes from 570.169.
+
+  [ Luca Boccassi ]
+  * Remove myself from Uploaders.
+
+ -- Andreas Beckmann <anbe@debian.org>  Fri, 20 Jun 2025 00:25:32 +0200
+
+nvidia-graphics-drivers (390.157-13) UNRELEASED; urgency=medium
+
+  * Backport ccflags-y and nv_timer_delete_sync changes from 570.153.02 and
+    drm_connector_helper_funcs_mode_valid_has_const_mode_arg changes from
+    550.163.01 and import tentative fix from CachyOS for avoiding calls to
+    GPL-only symbol __vma_start_write to fix kernel module build for
+    Linux 6.15.  (Closes: #1107817)
+
+ -- Andreas Beckmann <anbe@debian.org>  Wed, 18 Jun 2025 11:18:35 +0200
 
 nvidia-graphics-drivers (390.157-12) UNRELEASED; urgency=medium
 
@@ -7685,6 +8232,10 @@ nvidia-graphics-drivers (343.22-1) experimental; urgency=medium
  -- Andreas Beckmann <anbe@debian.org>  Mon, 20 Oct 2014 19:04:58 +0200
 
 nvidia-graphics-drivers (340.108-2) UNRELEASED; urgency=medium
+
+  * Backport ccflags-y and nv_timer_delete_sync changes from 570.153.02 and
+    nv_vma_start_write changes from 570.169 to fix kernel module build for
+    Linux 6.15.
 
   * Backport drm_driver_has_date changes from 570.124.04 to fix kernel module
     build for Linux 6.14.

@@ -5,7 +5,9 @@ libnvidia-cfg.so.1 #PACKAGE# #MINVER# | libnvidia-cfg.so.1 #MINVER#
  nvCfgCloseDevice@Base 1.0.8174
  nvCfgDebug@Base 180
  nvCfgDetachDevice@Base 319
+ nvCfgDisableUVMPersistence@Base 550
  nvCfgDumpDisplayPortAuxLog@Base 390.42
+ nvCfgEnableUVMPersistence@Base 550
  nvCfgFlashGSyncDevice@Base 304.30
  nvCfgGetDeviceUUID@Base 325
  nvCfgGetDevices@Base 1.0.8174

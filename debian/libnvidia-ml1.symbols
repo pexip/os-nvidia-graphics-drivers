@@ -38,6 +38,7 @@ libnvidia-ml.so.1 #PACKAGE# #MINVER# | libnvidia-ml.so.1 #MINVER#
  nvmlDeviceGetBrand@Base 340
  nvmlDeviceGetBridgeChipInfo@Base 331.20
  nvmlDeviceGetBusType@Base 495
+ nvmlDeviceGetC2cModeInfoV@Base 545
  nvmlDeviceGetClkMonStatus@Base 470
  nvmlDeviceGetClock@Base 361.42
  nvmlDeviceGetClockInfo@Base 270
@@ -84,6 +85,7 @@ libnvidia-ml.so.1 #PACKAGE# #MINVER# | libnvidia-ml.so.1 #MINVER#
  nvmlDeviceGetGpcClkMinMaxVfOffset@Base 520
  nvmlDeviceGetGpcClkVfOffset@Base 515
  nvmlDeviceGetGpuFabricInfo@Base 525
+ nvmlDeviceGetGpuFabricInfoV@Base 550
  nvmlDeviceGetGpuInstanceById@Base 450
  nvmlDeviceGetGpuInstanceId@Base 450
  nvmlDeviceGetGpuInstancePossiblePlacements@Base 450
@@ -142,6 +144,7 @@ libnvidia-ml.so.1 #PACKAGE# #MINVER# | libnvidia-ml.so.1 #MINVER#
  nvmlDeviceGetName@Base 270
  nvmlDeviceGetNumFans@Base 510
  nvmlDeviceGetNumGpuCores@Base 510
+ nvmlDeviceGetNumaNodeId@Base 550
  nvmlDeviceGetNvLinkCapability@Base 361
  nvmlDeviceGetNvLinkErrorCounter@Base 361
  nvmlDeviceGetNvLinkRemoteDeviceType@Base 470
@@ -154,6 +157,7 @@ libnvidia-ml.so.1 #PACKAGE# #MINVER# | libnvidia-ml.so.1 #MINVER#
  nvmlDeviceGetOfaUtilization@Base 535
  nvmlDeviceGetP2PStatus@Base 375.20
  nvmlDeviceGetPciInfo@Base 270
+ nvmlDeviceGetPciInfoExt@Base 550
  nvmlDeviceGetPciInfo_v2@Base 285
  nvmlDeviceGetPciInfo_v3@Base 384
  nvmlDeviceGetPcieLinkMaxSpeed@Base 510
@@ -171,6 +175,7 @@ libnvidia-ml.so.1 #PACKAGE# #MINVER# | libnvidia-ml.so.1 #MINVER#
  nvmlDeviceGetPowerState@Base 270
  nvmlDeviceGetPowerUsage@Base 270
  nvmlDeviceGetProcessUtilization@Base 384
+ nvmlDeviceGetProcessesUtilizationInfo@Base 550
  nvmlDeviceGetRemappedRows@Base 450
  nvmlDeviceGetRetiredPages@Base 319
  nvmlDeviceGetRetiredPagesPendingStatus@Base 319
@@ -199,11 +204,16 @@ libnvidia-ml.so.1 #PACKAGE# #MINVER# | libnvidia-ml.so.1 #MINVER#
  nvmlDeviceGetUtilizationRates@Base 270
  nvmlDeviceGetVbiosVersion@Base 285
  nvmlDeviceGetVgpuCapabilities@Base 525
+ nvmlDeviceGetVgpuHeterogeneousMode@Base 550
+ nvmlDeviceGetVgpuInstancesUtilizationInfo@Base 550
  nvmlDeviceGetVgpuMetadata@Base 375.26
  nvmlDeviceGetVgpuProcessUtilization@Base 384
+ nvmlDeviceGetVgpuProcessesUtilizationInfo@Base 550
  nvmlDeviceGetVgpuSchedulerCapabilities@Base 535
  nvmlDeviceGetVgpuSchedulerLog@Base 535
  nvmlDeviceGetVgpuSchedulerState@Base 535
+ nvmlDeviceGetVgpuTypeCreatablePlacements@Base 550
+ nvmlDeviceGetVgpuTypeSupportedPlacements@Base 550
  nvmlDeviceGetVgpuUtilization@Base 375
  nvmlDeviceGetViolationStatus@Base 340
  nvmlDeviceGetVirtualizationMode@Base 361.28
@@ -245,6 +255,8 @@ libnvidia-ml.so.1 #PACKAGE# #MINVER# | libnvidia-ml.so.1 #MINVER#
  nvmlDeviceSetPowerManagementLimit@Base 304
  nvmlDeviceSetPowerManagementLimit_v2@Base 535
  nvmlDeviceSetTemperatureThreshold@Base 460
+ nvmlDeviceSetVgpuCapabilities@Base 550
+ nvmlDeviceSetVgpuHeterogeneousMode@Base 550
  nvmlDeviceSetVgpuSchedulerState@Base 535
  nvmlDeviceSetVirtualizationMode@Base 361.28
  nvmlDeviceValidateInforom@Base 304
@@ -290,6 +302,8 @@ libnvidia-ml.so.1 #PACKAGE# #MINVER# | libnvidia-ml.so.1 #MINVER#
  nvmlShutdown@Base 270
  nvmlSystemGetConfComputeCapabilities@Base 535
  nvmlSystemGetConfComputeGpusReadyState@Base 535
+ nvmlSystemGetConfComputeKeyRotationThresholdInfo@Base 550
+ nvmlSystemGetConfComputeSettings@Base 550.54
  nvmlSystemGetConfComputeState@Base 535
  nvmlSystemGetCudaDriverVersion@Base 378
  nvmlSystemGetCudaDriverVersion_v2@Base 410.66
@@ -300,6 +314,7 @@ libnvidia-ml.so.1 #PACKAGE# #MINVER# | libnvidia-ml.so.1 #MINVER#
  nvmlSystemGetProcessName@Base 285
  nvmlSystemGetTopologyGpuSet@Base 352
  nvmlSystemSetConfComputeGpusReadyState@Base 535
+ nvmlSystemSetConfComputeKeyRotationThresholdInfo@Base 550
  nvmlSystemSetNvlinkBwMode@Base 535
  nvmlUnitGetCount@Base 270
  nvmlUnitGetDevices@Base 270
@@ -333,6 +348,7 @@ libnvidia-ml.so.1 #PACKAGE# #MINVER# | libnvidia-ml.so.1 #MINVER#
  nvmlVgpuInstanceGetLicenseStatus@Base 375
  nvmlVgpuInstanceGetMdevUUID@Base 440.59
  nvmlVgpuInstanceGetMetadata@Base 375.26
+ nvmlVgpuInstanceGetPlacementId@Base 550
  nvmlVgpuInstanceGetType@Base 375
  nvmlVgpuInstanceGetUUID@Base 367.27
  nvmlVgpuInstanceGetVmDriverVersion@Base 367.27
@@ -341,9 +357,11 @@ libnvidia-ml.so.1 #PACKAGE# #MINVER# | libnvidia-ml.so.1 #MINVER#
  nvmlVgpuTypeGetCapabilities@Base 510.47.03
  nvmlVgpuTypeGetClass@Base 361.42
  nvmlVgpuTypeGetDeviceID@Base 361.42
+ nvmlVgpuTypeGetFbReservation@Base 550
  nvmlVgpuTypeGetFrameRateLimit@Base 375
  nvmlVgpuTypeGetFramebufferSize@Base 361.42
  nvmlVgpuTypeGetGpuInstanceProfileId@Base 450.80.02
+ nvmlVgpuTypeGetGspHeapSize@Base 550
  nvmlVgpuTypeGetLicense@Base 361.42
  nvmlVgpuTypeGetMaxInstances@Base 375
  nvmlVgpuTypeGetMaxInstancesPerVm@Base 410
